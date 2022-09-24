@@ -5762,8 +5762,8 @@ function randomiseWord() {
     return wordList[Math.floor(Math.random() * wordList.length)]; //random word generator taken from array wordList
 }
 
-function playRound() { //Basic skeleton of how the game is going to work
-    var response = prompt(`What's the word?`);
+function playRound() {                         //Basic skeleton of how the game is going to work
+    var response = prompt(`What's the word?`); //We'll have to adapt this code.
     var word = randomiseWord();
     if (response === word) {
         alert('YEEHAW');
@@ -5774,5 +5774,7 @@ function playRound() { //Basic skeleton of how the game is going to work
     }
 }
 
-//Grab word with randomiseWord, then turn word into an array. That way it might be easier to get the positionings. 
+//Grab word with randomiseWord, then turn word into an array. 
+//That way it might be easier to get the positionings. 
 //When we type our word, it'll push each letter into our own array.
+//little update test
