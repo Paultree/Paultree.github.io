@@ -5774,7 +5774,43 @@ function playRound() {                         //Basic skeleton of how the game 
     }
 }
 
+
+function limit (string) {  
+    return string.substring(0, 5) //only allows 5 characters to be put in.
+  }
+
+const firstRow = document.getElementsByClassName('first-row');
+
+const testInput = document.getElementById('test-input');
+
+const arrWord = []
+
+// window.addEventListener('keydown', (event) => {
+//     arrWord.push(event.key);
+//     document.getElementById("one").innerText = arrWord[0];
+//     document.getElementById("two").innerText = arrWord[1];
+//     document.getElementById("three").innerText = arrWord[2];
+//     document.getElementById("four").innerText = arrWord[3];
+//     document.getElementById("five").innerText = arrWord[4];
+// })
+    
+window.addEventListener('keydown', (event) => {
+    if (event.key == 'Enter') {
+        console.log('skip');
+    } else if (event.key == 'Backspace') {
+        arrWord.pop();
+        document.getElementById(`${arrWord.length+1}`).innerText = '';
+        for (i=0;i<arrWord.length;i++) {
+            document.getElementById(`${arrWord.length}`).innerText = arrWord[arrWord.length-1];
+        }
+    } else {
+        arrWord.push(event.key);
+        document.getElementById(`${arrWord.length}`).innerText = arrWord[arrWord.length-1];
+    }  
+})
+
 //Grab word with randomiseWord, then turn word into an array. 
 //That way it might be easier to get the positionings. 
 //When we type our word, it'll push each letter into our own array.
-//little update test
+
+//refresh the view, and iterate through array and put each letter in correct spot//
