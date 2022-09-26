@@ -31,13 +31,19 @@ function checkGuess() {
     if (!wordList.includes(arrWord.join(''))) {
         console.log('This is not a valid word');
         //makes sure the word user submits for checking is on the wordList.
+    } else if (arrWord.join(',') === arrSol.join(',')) {
+        for (let i=0; i<5; i++) {
+            row.children[i].style.background = 'green'; //turns the entire row green
+        }
+        alert('Nice'); //You win condition! do another if statement here for phew, nice, too good, etc.
+        return;
     } else {
         for (let i=0; i<5; i++) {
             //because there is only 5 characters allowed, we can do a for loop with 5 iterations.
-            if (arrSol[i] === arrWord[i]) {
+            if (arrWord[i] === arrSol[i]) {
             //if letter and positioning match
-        row.children[i].style.background = 'green'; //turns the corresponding box green.
-            } else if (arrSol.includes(arrWord[i])) {
+                row.children[i].style.background = 'green'; //turns the corresponding box green.
+            } else if (arrSol.includes(arrWord[i]) && !(arrWord[i] === arrSol[i])) {
                 //if letter match but positioning incorrect
                 row.children[i].style.background = 'yellow'; //turns the corresponding box yellow. still need to account for if user puts double letter but solution word only has 1 of the letter.
             } else {
