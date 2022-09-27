@@ -25,20 +25,20 @@ window.addEventListener('keyup', (event) => {
                 && arrWord.length < 5) {  //user not allowed to input more than 5 characters.                                           
         arrWord.push(event.key.toUpperCase()); //pushes a capitalised user input into arrWord.                                   
         row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1].toUpperCase(); //user input goes into array and as such goes   
-    }  else console.log('try again')                                                           //into corresponding spot in the row.    
+    }                                                             //into corresponding spot in the row.    
 })                                          //extended: document.getElementById('row-1').children[0].innerText = arrWord[0]
 
 
 
 function checkWord() {
     if (!wordList.includes(arrWord.join(''))) {
-        console.log('This is not a valid word');
+        alert('This is not a valid word');
         //makes sure the word user submits for checking is on the wordList.
     } else if (arrWord.join(',') === arrSol.join(',')) {
         for (let i=0; i<5; i++) {
             row.children[i].style.background = 'green'; //turns the entire row green
         }
-        alert('Nice'); //You win condition! do another if statement here for phew, nice, too good, etc.
+        alert('Nice! You win. Refresh to play again.'); //You win condition! do another if statement here for phew, nice, too good, etc.
         return;
     } else {
         var occSol = {};
