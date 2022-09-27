@@ -3,7 +3,7 @@
 Purpose of this project is to build a wordle clone.
 
 Plan:
-- Use an array of words in which we are going to pull a word to use as our answer. We are also going to the that array word list to validate the user's response so that just like Wordle it will reject the user's input if they decide to put in 'spaghetti' words (eg. asdfg).
+- Use an array of words in which we are going to pull a word to use as our answer. We are also going to the array word list to validate the user's response so that just like Wordle it will reject the user's input if they decide to put in 'spaghetti' words (eg. asdfg).
 - Create a basic skeleton/framework of how a round of the game will work.
 - Create a 5 x 6 grid (similar to Wordle) using HTML. User should only be able to fill out one row at a time. Only until user fulfills the following conditions can they move onto next row/attempt (unless they get the answer):
     - Must be a valid word (must be included in our word bank array)
@@ -41,9 +41,18 @@ Future:
 - Added another if statement to our 'yellow' coloring condition.
     - Did not fix our problem.
 - Added an if statement to our checkGuess function that tells user they won if they guess correctly.
+- Created a keyboard
+- Updated some of the styling.
 
 Problem:
 - Same problem from 24/09/2022.
 
 Future:
 - If user guesses correctly, may add a feature where depending on how many guesses are remaining, the console or alert will tell the user something different. just like in the original.
+
+27/09/2022
+- Added functionality to keyboard
+- Added feature where keyboard corresponds to submitted word.
+
+Problem:
+- Same problem from 24/09/2022.

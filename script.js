@@ -8,26 +8,28 @@ var arrSol = randomiseWord().split(''); //turns our answer word into an array.
 
 let arrWord = []
 
-let guessesRemaining = 6
+let rounds = 6
  
-let row = document.getElementById(`row-${7-guessesRemaining}`); //grabs row-1, then after checking guess will grab row-2, and so on..
+let row = document.getElementById(`row-${7-rounds}`); //grabs row-1, then after checking guess will grab row-2, and so on..
 
+
+//LOGIC FOR THE GAME ROUNDS//
 window.addEventListener('keyup', (event) => {
     if (event.key == 'Enter') {
-        checkGuess(); 
+        checkWord(); 
     } else if (event.key == 'Backspace') {
         arrWord.pop(); //removes the last element from arrWord array.
-        row.children[arrWord.length].innerText = ''; //works like a backspace. works off array length.
+        row.children[arrWord.length].innerText = ''; //works like a backspace. works off array length. https://stackoverflow.com/questions/16302045/finding-child-element-of-parent-with-javascript
     } else if (event.key.match(/[a-z]/gi) //regex that only accepts alphabetical characters(doesn't allow function keys and numerics)
                 && event.key.length === 1 //also has to be one character ie. letter.
                 && arrWord.length < 5) {  //user not allowed to input more than 5 characters.                                           
         arrWord.push(event.key.toUpperCase()); //pushes a capitalised user input into arrWord.                                   
         row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1].toUpperCase(); //user input goes into array and as such goes   
-    }  else console.log('try again')                                                           //into corresponding spot in the row. 
+    }  else console.log('try again')                                                           //into corresponding spot in the row.    
 })                                          //extended: document.getElementById('row-1').children[0].innerText = arrWord[0]
 
 
-function checkGuess() {
+function checkWord() {
     if (!wordList.includes(arrWord.join(''))) {
         console.log('This is not a valid word');
         //makes sure the word user submits for checking is on the wordList.
@@ -43,16 +45,39 @@ function checkGuess() {
             if (arrWord[i] === arrSol[i]) {
             //if letter and positioning match
                 row.children[i].style.background = 'green'; //turns the corresponding box green.
-            } else if (arrSol.includes(arrWord[i]) && !(arrWord[i] === arrSol[i])) {
+                document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'green';
+            } else if (arrSol.includes(arrWord[i])) {
                 //if letter match but positioning incorrect
                 row.children[i].style.background = 'yellow'; //turns the corresponding box yellow. still need to account for if user puts double letter but solution word only has 1 of the letter.
+                document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'yellow';
+                
+
             } else {
                 row.children[i].style.background = 'grey'; //all wrong answers turn grey.
+                document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'grey';
             }
         }
-        guessesRemaining = guessesRemaining-1;
-        row = document.getElementById(`row-${7-guessesRemaining}`);
+        rounds = rounds-1;
+        row = document.getElementById(`row-${7-rounds}`);
         arrWord = [];
         // after the loop, we're modifying the guessesRemaining and row variables so that it will push onto the next row.
     }
+}
+
+//keyboard functioning//
+const keys = document.getElementsByClassName('key');
+
+for (let key of keys) {
+    key.addEventListener('click', (event)=> {
+        if (arrWord.length < 5 && event.target.dataset.key <= 90 && event.target.dataset.key >= 65) {
+            let letter = String.fromCharCode(`${event.target.dataset.key}`)
+            arrWord.push(letter);
+            row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1];
+        } else if (event.target.dataset.key == 13) {
+            checkWord();
+        } else if (event.target.dataset.key == 8) {
+            arrWord.pop();
+            row.children[arrWord.length].innerText = '';
+        }
+    })
 }
