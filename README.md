@@ -53,6 +53,6 @@ Future:
 27/09/2022
 - Added functionality to keyboard
 - Added feature where keyboard corresponds to submitted word.
+- Addressed problem faced from 24/09/2022 entry.
 
-Problem:
-- Same problem from 24/09/2022.
+
