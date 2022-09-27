@@ -29,6 +29,7 @@ window.addEventListener('keyup', (event) => {
 })                                          //extended: document.getElementById('row-1').children[0].innerText = arrWord[0]
 
 
+
 function checkWord() {
     if (!wordList.includes(arrWord.join(''))) {
         console.log('This is not a valid word');
@@ -40,18 +41,33 @@ function checkWord() {
         alert('Nice'); //You win condition! do another if statement here for phew, nice, too good, etc.
         return;
     } else {
+        var occSol = {};
+        for (let i=0; i<5; i++) {
+            var elementSol = arrSol[i];
+            if (occSol[elementSol]) {
+                occSol[elementSol] += 1;
+            } else {
+                occSol[elementSol] = 1; // counts how many times a letter occurs in our solution word.
+            }
+        }
+
         for (let i=0; i<5; i++) {
             //because there is only 5 characters allowed, we can do a for loop with 5 iterations.
             if (arrWord[i] === arrSol[i]) {
             //if letter and positioning match
                 row.children[i].style.background = 'green'; //turns the corresponding box green.
                 document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'green';
+                occSol[`${arrWord[i]}`] -= 1; //removing a counter off the letter for any duplicate letters that will come.
             } else if (arrSol.includes(arrWord[i])) {
-                //if letter match but positioning incorrect
-                row.children[i].style.background = 'yellow'; //turns the corresponding box yellow. still need to account for if user puts double letter but solution word only has 1 of the letter.
-                document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'yellow';
-                
-
+                if (occSol[`${arrWord[i]}`] > 0) { //checks for if our answer word contains any more occurences of it.
+                   //if letter match but positioning incorrect
+                    row.children[i].style.background = 'yellow'; //turns the corresponding box yellow. still need to account for if user puts double letter but solution word only has 1 of the letter.
+                    document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'yellow';
+                    occSol[`${arrWord[i]}`] -= 1;
+                } else if (occSol[`${arrWord[i]}`] == 0) { //if there is no more to allocate, turn all other duplicate letters grey.
+                    row.children[i].style.background = 'grey';
+                    document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'grey';
+                }
             } else {
                 row.children[i].style.background = 'grey'; //all wrong answers turn grey.
                 document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'grey';
