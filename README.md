@@ -55,4 +55,7 @@ Future:
 - Added feature where keyboard corresponds to submitted word.
 - Addressed problem faced from 24/09/2022 entry.
 
+To be implemented:
+- A reset game button.
+- Adding an alert to errors made by user.
 
