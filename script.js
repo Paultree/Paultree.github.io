@@ -41,8 +41,12 @@ function checkWord() {
         for (let i=0; i<5; i++) {
             row.children[i].style.background = 'green'; //turns the entire row green
         }
-        alert('Nice! You win. Refresh to play again.'); //You win condition! do another if statement here for phew, nice, too good, etc.
-        return;
+        if (guessesRemaining == 1) {
+            alert('Phew! Refresh to play again.');
+        } else {
+            alert('Nice! You win. Refresh to play again.'); //You win condition! do another if statement here for phew, nice, too good, etc.
+            return;
+        }
     } else {
         var occSol = {};
         for (let i=0; i<5; i++) {
@@ -55,31 +59,27 @@ function checkWord() {
         }
 
         for (let i=0; i<5; i++) {
-            //because there is only 5 characters allowed, we can do a for loop with 5 iterations.
             if (arrWord[i] === arrSol[i]) {
-            //if letter and positioning match
-                row.children[i].style.background = 'green'; //turns the corresponding box green.
+                row.children[i].style.background = 'green';
                 arrGreen.push(arrWord[i]);
-                occSol[`${arrWord[i]}`] -= 1; //removing a counter off the letter for any duplicate letters that will come.
+                occSol[`${arrWord[i]}`] -= 1; 
             } else if (arrSol.includes(arrWord[i])) {
-                if (occSol[`${arrWord[i]}`] > 0) { //checks for if our answer word contains any more occurences of it.
-                   //if letter match but positioning incorrect
-                    row.children[i].style.background = 'yellow'; //turns the corresponding box yellow. still need to account for if user puts double letter but solution word only has 1 of the letter.
+                if (occSol[`${arrWord[i]}`] > 0) {
+                    row.children[i].style.background = 'yellow';
                     arrYellow.push(arrWord[i]);
                     occSol[`${arrWord[i]}`] -= 1;
-                } else if (occSol[`${arrWord[i]}`] == 0) { //if there is no more to allocate, turn all other duplicate letters grey.
+                } else if (occSol[`${arrWord[i]}`] == 0) {
                     row.children[i].style.background = 'grey';
                     arrGrey.push(arrWord[i]);
                 }
             } else {
-                row.children[i].style.background = 'grey'; //all wrong answers turn grey.
+                row.children[i].style.background = 'grey';
                 arrGrey.push(arrWord[i]);
             }
         }
         rounds = rounds-1;
         row = document.getElementById(`row-${7-rounds}`);
         arrWord = [];
-        // after the loop, we're modifying the guessesRemaining and row variables so that it will push onto the next row.
 
         for (let i = 0; i < arrGrey.length; i++) {
             document.getElementById(arrGrey[i].charCodeAt(0)).style.background = 'grey';
@@ -92,7 +92,7 @@ function checkWord() {
         for (let i = 0; i < arrGreen.length; i++) {
             document.getElementById(arrGreen[i].charCodeAt(0)).style.background = 'green';
         }
-        //3 array loops that keeps guessed letters
+        
     }
 }
 
@@ -101,7 +101,9 @@ const keys = document.getElementsByClassName('key');
 
 for (let key of keys) {
     key.addEventListener('click', (event)=> {
-        if (arrWord.length < 5 && event.target.dataset.key <= 90 && event.target.dataset.key >= 65) {
+        if (arrWord.length < 5 && 
+            event.target.dataset.key <= 90 && 
+            event.target.dataset.key >= 65) {
             let letter = String.fromCharCode(`${event.target.dataset.key}`)
             arrWord.push(letter);
             row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1];

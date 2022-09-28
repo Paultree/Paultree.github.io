@@ -66,3 +66,5 @@ To be implemented:
         - second loop turns all elements yellow. this is put 2nd to account for overlaps between these arrays.
         - 3rd loop turns all elements green.
 
+To be implemented:
+- Styling.
