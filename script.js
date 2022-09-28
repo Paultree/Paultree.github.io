@@ -18,43 +18,44 @@ window.addEventListener('keyup', (event) => {
     if (event.key == 'Enter') {
         checkWord(); 
     } else if (event.key == 'Backspace') {
-        arrWord.pop(); //removes the last element from arrWord array.
-        row.children[arrWord.length].innerText = ''; //works like a backspace. works off array length. https://stackoverflow.com/questions/16302045/finding-child-element-of-parent-with-javascript
-    } else if (event.key.match(/[a-z]/gi) //regex that only accepts alphabetical characters(doesn't allow function keys and numerics)
-                && event.key.length === 1 //also has to be one character ie. letter.
-                && arrWord.length < 5) {  //user not allowed to input more than 5 characters.                                           
-        arrWord.push(event.key.toUpperCase()); //pushes a capitalised user input into arrWord.                                   
-        row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1].toUpperCase(); //user input goes into array and as such goes   
-    }                                                             //into corresponding spot in the row.    
-})                                          //extended: document.getElementById('row-1').children[0].innerText = arrWord[0]
-
+        arrWord.pop(); 
+        row.children[arrWord.length].innerText = ''; 
+    } else if (event.key.match(/[a-z]/gi)
+                && event.key.length === 1 
+                && arrWord.length < 5) {                                     
+        arrWord.push(event.key.toUpperCase());                      
+        row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1].toUpperCase();    
+    }                                                             
+})                                          
 let arrGreen = [];
 let arrYellow = [];
 let arrGrey = [];
+let occSol = {};
 
 
 function checkWord() {
     if (!wordList.includes(arrWord.join(''))) {
         alert('This is not a valid word');
-        //makes sure the word user submits for checking is on the wordList.
+
     } else if (arrWord.join(',') === arrSol.join(',')) {
         for (let i=0; i<5; i++) {
-            row.children[i].style.background = 'green'; //turns the entire row green
+            row.children[i].style.background = 'green'; 
         }
         if (guessesRemaining == 1) {
             alert('Phew! Refresh to play again.');
+        } else if (guessesRemaining == 0) {
+            alert('Unlucky! Try again.')
         } else {
-            alert('Nice! You win. Refresh to play again.'); //You win condition! do another if statement here for phew, nice, too good, etc.
+            alert('Nice! You win. Refresh to play again.');
             return;
         }
     } else {
-        var occSol = {};
         for (let i=0; i<5; i++) {
             var elementSol = arrSol[i];
             if (occSol[elementSol]) {
                 occSol[elementSol] += 1;
             } else {
-                occSol[elementSol] = 1; // counts how many times a letter occurs in our solution word.
+                occSol[elementSol] = 1; 
             }
         }
 
@@ -92,7 +93,7 @@ function checkWord() {
         for (let i = 0; i < arrGreen.length; i++) {
             document.getElementById(arrGreen[i].charCodeAt(0)).style.background = 'green';
         }
-        
+
     }
 }
 
