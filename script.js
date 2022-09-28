@@ -28,6 +28,9 @@ window.addEventListener('keyup', (event) => {
     }                                                             //into corresponding spot in the row.    
 })                                          //extended: document.getElementById('row-1').children[0].innerText = arrWord[0]
 
+let arrGreen = [];
+let arrYellow = [];
+let arrGrey = [];
 
 
 function checkWord() {
@@ -56,27 +59,40 @@ function checkWord() {
             if (arrWord[i] === arrSol[i]) {
             //if letter and positioning match
                 row.children[i].style.background = 'green'; //turns the corresponding box green.
-                document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'green';
+                arrGreen.push(arrWord[i]);
                 occSol[`${arrWord[i]}`] -= 1; //removing a counter off the letter for any duplicate letters that will come.
             } else if (arrSol.includes(arrWord[i])) {
                 if (occSol[`${arrWord[i]}`] > 0) { //checks for if our answer word contains any more occurences of it.
                    //if letter match but positioning incorrect
                     row.children[i].style.background = 'yellow'; //turns the corresponding box yellow. still need to account for if user puts double letter but solution word only has 1 of the letter.
-                    document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'yellow';
+                    arrYellow.push(arrWord[i]);
                     occSol[`${arrWord[i]}`] -= 1;
                 } else if (occSol[`${arrWord[i]}`] == 0) { //if there is no more to allocate, turn all other duplicate letters grey.
                     row.children[i].style.background = 'grey';
-                    document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'grey';
+                    arrGrey.push(arrWord[i]);
                 }
             } else {
                 row.children[i].style.background = 'grey'; //all wrong answers turn grey.
-                document.getElementById(arrWord[i].charCodeAt(0)).style.background = 'grey';
+                arrGrey.push(arrWord[i]);
             }
         }
         rounds = rounds-1;
         row = document.getElementById(`row-${7-rounds}`);
         arrWord = [];
         // after the loop, we're modifying the guessesRemaining and row variables so that it will push onto the next row.
+
+        for (let i = 0; i < arrGrey.length; i++) {
+            document.getElementById(arrGrey[i].charCodeAt(0)).style.background = 'grey';
+        }
+
+        for (let i = 0; i < arrYellow.length; i++) {
+            document.getElementById(arrYellow[i].charCodeAt(0)).style.background = 'yellow';
+        }
+
+        for (let i = 0; i < arrGreen.length; i++) {
+            document.getElementById(arrGreen[i].charCodeAt(0)).style.background = 'green';
+        }
+        //3 array loops that keeps guessed letters
     }
 }
 

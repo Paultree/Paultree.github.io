@@ -59,3 +59,10 @@ To be implemented:
 - A reset game button.
 - Adding an alert to errors made by user.
 
+28/09/2022 
+- Fixed an issue where keyboard wasn't maintaining the correct colours.
+    - Used 3 for loops.
+        - first loop turns all elements grey.
+        - second loop turns all elements yellow. this is put 2nd to account for overlaps between these arrays.
+        - 3rd loop turns all elements green.
+
