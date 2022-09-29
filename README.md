@@ -68,3 +68,7 @@ To be implemented:
 
 To be implemented:
 - Styling.
+
+29/09/2022
+- completed the styling.
+- 

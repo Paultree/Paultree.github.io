@@ -6,28 +6,29 @@ function randomiseWord() {
 
 var arrSol = randomiseWord().split(''); //turns our answer word into an array.
 
-let arrWord = []
+let arrWord = [];
 
-let rounds = 6
+let rounds = 6;
  
 let row = document.getElementById(`row-${7-rounds}`); //grabs row-1, then after checking guess will grab row-2, and so on..
 
-
-//LOGIC FOR THE GAME ROUNDS//
 window.addEventListener('keyup', (event) => {
     if (event.key == 'Enter') {
-        checkWord(); 
+        checkWord();   
     } else if (event.key == 'Backspace') {
         arrWord.pop(); 
         row.children[arrWord.length].innerText = ''; 
         alert.innerText = '';
         row.children[arrWord.length].classList.remove('box');
+        //removes letter from both array and onscreen appearance.
     } else if (event.key.match(/[a-z]/gi)
                 && event.key.length === 1 
-                && arrWord.length < 5) {                                     
+                && arrWord.length < 5) {    
+                //only accepts alphabet letters and limits our array to 5 elements/characters.                              
         arrWord.push(event.key.toUpperCase());                      
         row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1].toUpperCase();
         row.children[arrWord.length-1].classList.add('box');    
+        //adds letter to array and on-screen.
     }                                                          
 })               
 
@@ -39,12 +40,14 @@ let arrGrey = [];
 function checkWord() {
     if (!wordList.includes(arrWord.join(''))) {
         alert.innerText = 'This is not a valid word!';
-
+        //checks if the word being checked belongs to our word list/dictionary
     } else if (arrWord.join(',') === arrSol.join(',')) {
         alert.innerText = '';
         for (let i=0; i<5; i++) {
             row.children[i].classList.add('green'); 
+            //checks if user submits the correct word
         }
+    
         if (rounds == 1) {
             results.innerHTML = 'Phew! Click here to replay.';
             modal.style.display = 'block';
@@ -52,11 +55,12 @@ function checkWord() {
             results.innerHTML = 'Phew! Click here to replay.';
             modal.style.display = 'block';
             }
-        } else if (rounds == 1) {
-            results.innerHTML = `Unlucky! The word was ${arrSol.join('')}! Click here to replay.`;
-            modal.style.display = 'block';
+        //results screen is dependent on how many tries it took user to get right word.
+    } else if (rounds == 1) {
+        results.innerHTML = `Unlucky! The word was ${arrSol.join('')}! Click here to replay.`;
+        modal.style.display = 'block';
+        //what the result screen shows if user fails.
     } else {
-        alert.innerText = '';
 
         var occSol = {};
         for (let i=0; i<5; i++) {
@@ -67,6 +71,7 @@ function checkWord() {
                 occSol[elementSol] = 1; 
             }
         }
+        //letter occurrence counter for answer word.
 
         for (let i=0; i<5; i++) {
             if (arrWord[i] === arrSol[i]) {
@@ -75,7 +80,7 @@ function checkWord() {
                 occSol[`${arrWord[i]}`] -= 1;
             }
         }
-        
+        // checks for any correct position letters. removes one letter occurrence.
 
         for (let i=0; i<5; i++) {
             if (arrSol.includes(arrWord[i])) {
@@ -87,34 +92,39 @@ function checkWord() {
                     row.children[i].classList.add('grey');
                     arrGrey.push(arrWord[i]);
                 }
-
+                //checks if letter is contained in answer. removes one letter occurrence counter if it does.
             } else {
                 row.children[i].classList.add('grey');
                 arrGrey.push(arrWord[i]);
+                //any incorrect letter turns grey.
+                //letters are pushed into color arrays (arrGreen/Yellow/Grey)
             }
         }
 
         rounds = rounds-1;
         row = document.getElementById(`row-${7-rounds}`);
+        //moves our inputs into the next row of the grid.
         arrWord = [];
-        console.log(rounds);
+        //resets user input.
+        
 
         for (let i = 0; i < arrGrey.length; i++) {
             document.getElementById(arrGrey[i].charCodeAt(0)).classList.add('grey');
         }
-
+        
         for (let i = 0; i < arrYellow.length; i++) {
             document.getElementById(arrYellow[i].charCodeAt(0)).classList.add('yellow');
         }
-
+        
         for (let i = 0; i < arrGreen.length; i++) {
             document.getElementById(arrGreen[i].charCodeAt(0)).classList.add('green');
         }
-
+        //changes keys on keyboard from grey to yellow then green. 
     }
-}
+}   
 
-//keyboard functioning//
+
+//clickable keyboard
 const keys = document.getElementsByClassName('key');
 
 for (let key of keys) {
@@ -130,6 +140,7 @@ for (let key of keys) {
         } else if (event.target.dataset.key == 8) {
             arrWord.pop();
             row.children[arrWord.length].innerText = '';
+            alert.innerText = '';
         }
     })
 }
@@ -148,7 +159,9 @@ window.addEventListener('click', (event) => {
         modal.style.display = "none";
         }
     })  
+//clicking outside the results box will close the results box
 
 results.addEventListener('click', () => {
     location.reload(true);
 })
+//clicking the results box will reset the game
