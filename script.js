@@ -165,3 +165,11 @@ results.addEventListener('click', () => {
     location.reload(true);
 })
 //clicking the results box will reset the game
+
+const reset = document.getElementById('reset');
+
+reset.addEventListener('click', () => {
+    location.reload(true);
+})
+
+//reset button
