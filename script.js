@@ -35,34 +35,10 @@ window.addEventListener('keyup', (event) => {
 let arrGreen = [];
 let arrYellow = [];
 let arrGrey = [];
+let arrSubmitted = [];
 
-
-function checkWord() {
-    if (!wordList.includes(arrWord.join(''))) {
-        alert.innerText = 'This is not a valid word!';
-        //checks if the word being checked belongs to our word list/dictionary
-    } else if (arrWord.join(',') === arrSol.join(',')) {
-        alert.innerText = '';
-        for (let i=0; i<5; i++) {
-            row.children[i].classList.add('green'); 
-            //checks if user submits the correct word
-        }
-    
-        if (rounds == 1) {
-            results.innerHTML = 'Phew! Click here to replay.';
-            modal.style.display = 'block';
-        } else {
-            results.innerHTML = 'Nice! Click here to replay.';
-            modal.style.display = 'block';
-            }
-        //results screen is dependent on how many tries it took user to get right word.
-    } else if (rounds == 1) {
-        results.innerHTML = `Unlucky! The word was ${arrSol.join('')}! Click here to replay.`;
-        modal.style.display = 'block';
-        //what the result screen shows if user fails.
-    } else {
-
-        var occSol = {};
+function changeGridColor() {
+    var occSol = {};
         for (let i=0; i<5; i++) {
             var elementSol = arrSol[i];
             if (occSol[elementSol]) {
@@ -100,28 +76,59 @@ function checkWord() {
                 //letters are pushed into color arrays (arrGreen/Yellow/Grey)
             }
         }
+}
 
+function changeKeyColor() {
+    for (let i = 0; i < arrGrey.length; i++) {
+        document.getElementById(arrGrey[i].charCodeAt(0)).classList.add('grey');
+    }
+    
+    for (let i = 0; i < arrYellow.length; i++) {
+        document.getElementById(arrYellow[i].charCodeAt(0)).classList.add('yellow');
+    }
+    
+    for (let i = 0; i < arrGreen.length; i++) {
+        document.getElementById(arrGreen[i].charCodeAt(0)).classList.add('green');
+    }
+    //changes keys on keyboard from grey to yellow then green.
+}
+
+function checkWord() {
+    if (!wordList.includes(arrWord.join(''))) {
+        alert.innerText = 'This is not a valid word!';
+        //checks if the word being checked belongs to our word list/dictionary
+    } else if (arrWord.join(',') === arrSol.join(',')) {
+        alert.innerText = '';
+        changeGridColor();
+        changeKeyColor();
+        //checks if user submits the correct word
+        if (rounds == 1) {
+            results.innerHTML = 'Phew! Click here to replay.';
+            modal.style.display = 'block';
+        } else {
+            results.innerHTML = 'Nice! Click here to replay.';
+            modal.style.display = 'block';
+            }
+        //results screen is dependent on how many tries it took user to get right word.
+    } else if (rounds == 1) {
+        results.innerHTML = `Unlucky! The word was ${arrSol.join('')}! Click here to replay.`;
+        modal.style.display = 'block';
+        changeGridColor();
+        changeKeyColor();
+            //checks if user submits the correct word
+        
+        //what the result screen shows if user fails.
+    } else if (!arrSubmitted.includes(arrWord.join(''))) {
+        arrSubmitted.push(arrWord.join(''));
+        changeGridColor();
+        changeKeyColor();
         rounds = rounds-1;
         row = document.getElementById(`row-${7-rounds}`);
         //moves our inputs into the next row of the grid.
         arrWord = [];
         //resets user input.
-        
-
-        for (let i = 0; i < arrGrey.length; i++) {
-            document.getElementById(arrGrey[i].charCodeAt(0)).classList.add('grey');
-        }
-        
-        for (let i = 0; i < arrYellow.length; i++) {
-            document.getElementById(arrYellow[i].charCodeAt(0)).classList.add('yellow');
-        }
-        
-        for (let i = 0; i < arrGreen.length; i++) {
-            document.getElementById(arrGreen[i].charCodeAt(0)).classList.add('green');
-        }
-        //changes keys on keyboard from grey to yellow then green. 
     }
-}   
+}
 
 
 //clickable keyboard
@@ -145,7 +152,7 @@ for (let key of keys) {
     })
 }
 
-//modal box//
+//results box//
 const modal = document.getElementById('modal');
 
 const results = document.getElementById('results');
@@ -171,5 +178,4 @@ const reset = document.getElementById('reset');
 reset.addEventListener('click', () => {
     location.reload(true);
 })
-
-//reset button
+//reset button//
