@@ -30,7 +30,6 @@ window.addEventListener('keyup', (event) => {
 let arrGreen = [];
 let arrYellow = [];
 let arrGrey = [];
-let occSol = {};
 
 
 function checkWord() {
@@ -41,15 +40,16 @@ function checkWord() {
         for (let i=0; i<5; i++) {
             row.children[i].style.background = 'green'; 
         }
-        if (guessesRemaining == 1) {
+        if (rounds == 1) {
             alert('Phew! Refresh to play again.');
-        } else if (guessesRemaining == 0) {
+        } else if (rounds == 0) {
             alert('Unlucky! Try again.')
         } else {
             alert('Nice! You win. Refresh to play again.');
             return;
         }
     } else {
+        var occSol = {};
         for (let i=0; i<5; i++) {
             var elementSol = arrSol[i];
             if (occSol[elementSol]) {
@@ -69,10 +69,11 @@ function checkWord() {
                     row.children[i].style.background = 'yellow';
                     arrYellow.push(arrWord[i]);
                     occSol[`${arrWord[i]}`] -= 1;
-                } else if (occSol[`${arrWord[i]}`] == 0) {
+                } else {
                     row.children[i].style.background = 'grey';
                     arrGrey.push(arrWord[i]);
                 }
+
             } else {
                 row.children[i].style.background = 'grey';
                 arrGrey.push(arrWord[i]);
