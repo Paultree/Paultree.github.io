@@ -6,6 +6,10 @@ function randomiseWord() {
 
 var arrSol = randomiseWord().split(''); //turns our answer word into an array.
 
+var winSound = new Audio('win.mp3');
+
+var loseSound = new Audio('lose.mp3');
+
 let arrWord = [];
 
 let rounds = 6;
@@ -101,6 +105,7 @@ function checkWord() {
         alert.innerText = '';
         changeGridColor();
         changeKeyColor();
+        winSound.play();
         //checks if user submits the correct word
         if (rounds == 1) {
             results.innerHTML = 'Phew! Click here to replay.';
@@ -115,6 +120,7 @@ function checkWord() {
         modal.style.display = 'block';
         changeGridColor();
         changeKeyColor();
+        loseSound.play();
             //checks if user submits the correct word
         
         //what the result screen shows if user fails.
