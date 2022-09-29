@@ -71,4 +71,6 @@ To be implemented:
 
 29/09/2022
 - completed the styling.
-- 
+- added in a reset button.
+- added in a results screen upon win/lose.
+    - added in a reset button to results screen. Alternatively, user can close out of the results screen.
