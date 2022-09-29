@@ -75,3 +75,4 @@ To be implemented:
 - added in a results screen upon win/lose.
     - added in a reset button to results screen. Alternatively, user can close out of the results screen.
 - Re-arranged checkWord() so that it evaluates green letters first then checks for yellows/greys. Fixes an issue with the game where if answer only has 1 occurrence of a specific letter but submitted word has more than 1 occurrence and their positions is in a correct and incorrect position. If incorrect position occurs first, it turns yellow but then the correct position turns green.
+- Added in code so that user is not able to submit same word more than once.
