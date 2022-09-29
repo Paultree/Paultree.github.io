@@ -9,6 +9,11 @@
     align-items: center;
     font-size: 1.5rem;
     font-weight: 700;
+    transition: box-shadow .1s ease-in;
+}
+
+#grid > div > .box {
+    box-shadow: 2px 2px;
 }
 
 #grid > div {
@@ -64,7 +69,7 @@ li {
 #keyboard {
     margin-left: auto;
     margin-right: auto;
-    width: 45%;
+    width: 650px;
 
 }
 
@@ -116,3 +121,21 @@ button {
     text-decoration: none;
     color: black;
   }
+
+  .green, #grid > div > .green {
+    background: green;
+    color: whitesmoke;
+    border: 1px solid green;
+}
+
+.yellow, #grid > div > .yellow {
+    background: rgb(215, 215, 31);
+    color: whitesmoke;
+    border: 1px solid rgb(215, 215, 31);;
+}
+
+.grey, #grid > div > .grey {
+    background: grey;
+    color: whitesmoke;
+    border: 1px solid grey;
+}

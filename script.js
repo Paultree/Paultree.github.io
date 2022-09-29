@@ -20,12 +20,14 @@ window.addEventListener('keyup', (event) => {
     } else if (event.key == 'Backspace') {
         arrWord.pop(); 
         row.children[arrWord.length].innerText = ''; 
+        row.children[arrWord.length].classList.remove('box');
     } else if (event.key.match(/[a-z]/gi)
                 && event.key.length === 1 
                 && arrWord.length < 5) {                                     
         arrWord.push(event.key.toUpperCase());                      
-        row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1].toUpperCase();    
-    }                                                             
+        row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1].toUpperCase();
+        row.children[arrWord.length-1].classList.add('box');    
+    }                                                          
 })               
 
 let arrGreen = [];
@@ -40,21 +42,18 @@ function checkWord() {
     } else if (arrWord.join(',') === arrSol.join(',')) {
         alert.innerText = '';
         for (let i=0; i<5; i++) {
-            row.children[i].style.background = 'green'; 
+            row.children[i].classList.add('green'); 
         }
         if (rounds == 1) {
             results.innerHTML = 'Phew! Click here to replay.';
             modal.style.display = 'block';
-            return;
         } else {
             results.innerHTML = 'Phew! Click here to replay.';
             modal.style.display = 'block';
-            return;
             }
         } else if (rounds == 1) {
             results.innerHTML = `Unlucky! The word was ${arrSol.join('')}! Click here to replay.`;
             modal.style.display = 'block';
-            return;
     } else {
         alert.innerText = '';
         var occSol = {};
@@ -66,41 +65,43 @@ function checkWord() {
                 occSol[elementSol] = 1; 
             }
         }
-
+        console.log(rounds);
         for (let i=0; i<5; i++) {
             if (arrWord[i] === arrSol[i]) {
-                row.children[i].style.background = 'green';
+                row.children[i].classList.add('green');
                 arrGreen.push(arrWord[i]);
                 occSol[`${arrWord[i]}`] -= 1; 
             } else if (arrSol.includes(arrWord[i])) {
                 if (occSol[`${arrWord[i]}`] > 0) {
-                    row.children[i].style.background = 'yellow';
+                    row.children[i].classList.add('yellow');
                     arrYellow.push(arrWord[i]);
                     occSol[`${arrWord[i]}`] -= 1;
                 } else {
-                    row.children[i].style.background = 'grey';
+                    row.children[i].classList.add('grey');
                     arrGrey.push(arrWord[i]);
                 }
 
             } else {
-                row.children[i].style.background = 'grey';
+                row.children[i].classList.add('grey');
                 arrGrey.push(arrWord[i]);
             }
         }
+        console.log(rounds);
         rounds = rounds-1;
         row = document.getElementById(`row-${7-rounds}`);
         arrWord = [];
+        console.log(rounds);
 
         for (let i = 0; i < arrGrey.length; i++) {
-            document.getElementById(arrGrey[i].charCodeAt(0)).style.background = 'grey';
+            document.getElementById(arrGrey[i].charCodeAt(0)).classList.add('grey');
         }
 
         for (let i = 0; i < arrYellow.length; i++) {
-            document.getElementById(arrYellow[i].charCodeAt(0)).style.background = 'yellow';
+            document.getElementById(arrYellow[i].charCodeAt(0)).classList.add('yellow');
         }
 
         for (let i = 0; i < arrGreen.length; i++) {
-            document.getElementById(arrGreen[i].charCodeAt(0)).style.background = 'green';
+            document.getElementById(arrGreen[i].charCodeAt(0)).classList.add('green');
         }
 
     }
@@ -142,3 +143,5 @@ results.addEventListener('click', () => {
 })
 
 const alert = document.getElementById('alert');
+
+//bump effect
