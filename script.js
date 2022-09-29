@@ -40,9 +40,9 @@ function checkWord() {
         for (let i=0; i<5; i++) {
             row.children[i].style.background = 'green'; 
         }
-        if (rounds == 1) {
+        if (rounds == 2) {
             alert('Phew! Refresh to play again.');
-        } else if (rounds == 0) {
+        } else if (rounds == 1) {
             alert('Unlucky! Try again.')
         } else {
             alert('Nice! You win. Refresh to play again.');
