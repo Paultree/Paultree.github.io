@@ -6,9 +6,9 @@ function randomiseWord() {
 
 var arrSol = randomiseWord().split(''); //turns our answer word into an array.
 
-var winSound = new Audio('win.mp3');
+var winSound = new Audio('sound/win.mp3');
 
-var loseSound = new Audio('lose.mp3');
+var loseSound = new Audio('sound/lose.mp3');
 
 let arrWord = [];
 
