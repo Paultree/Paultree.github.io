@@ -26,7 +26,8 @@ window.addEventListener('keyup', (event) => {
         arrWord.push(event.key.toUpperCase());                      
         row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1].toUpperCase();    
     }                                                             
-})                                          
+})               
+
 let arrGreen = [];
 let arrYellow = [];
 let arrGrey = [];
@@ -34,22 +35,28 @@ let arrGrey = [];
 
 function checkWord() {
     if (!wordList.includes(arrWord.join(''))) {
-        alert('This is not a valid word');
+        alert.innerText = 'This is not a valid word!';
 
     } else if (arrWord.join(',') === arrSol.join(',')) {
+        alert.innerText = '';
         for (let i=0; i<5; i++) {
             row.children[i].style.background = 'green'; 
         }
         if (rounds == 1) {
-            alert('Phew! Refresh to play again.');
-        } else {
-            alert('Nice! You win. Refresh to play again.');
+            results.innerHTML = 'Phew! Click here to replay.';
+            modal.style.display = 'block';
             return;
-        }
-    } else if (rounds == 1) {
-        alert('Unlucky! Try again.');
-        return;
+        } else {
+            results.innerHTML = 'Phew! Click here to replay.';
+            modal.style.display = 'block';
+            return;
+            }
+        } else if (rounds == 1) {
+            results.innerHTML = `Unlucky! The word was ${arrSol.join('')}! Click here to replay.`;
+            modal.style.display = 'block';
+            return;
     } else {
+        alert.innerText = '';
         var occSol = {};
         for (let i=0; i<5; i++) {
             var elementSol = arrSol[i];
@@ -118,3 +125,20 @@ for (let key of keys) {
         }
     })
 }
+
+//modal box//
+const modal = document.getElementById('modal');
+
+const results = document.getElementById('results');
+
+window.addEventListener('click', (event) => {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    })  
+
+results.addEventListener('click', () => {
+    location.reload(true);
+})
+
+const alert = document.getElementById('alert');
