@@ -33,7 +33,6 @@ let arrGrey = [];
 
 
 function checkWord() {
-    console.log(rounds)
     if (!wordList.includes(arrWord.join(''))) {
         alert('This is not a valid word');
 
@@ -41,14 +40,15 @@ function checkWord() {
         for (let i=0; i<5; i++) {
             row.children[i].style.background = 'green'; 
         }
-        if (rounds == 2) {
+        if (rounds == 1) {
             alert('Phew! Refresh to play again.');
-        } else if (rounds == 1) {
-            alert('Unlucky! Try again.')
         } else {
             alert('Nice! You win. Refresh to play again.');
             return;
         }
+    } else if (rounds == 1) {
+        alert('Unlucky! Try again.');
+        return;
     } else {
         var occSol = {};
         for (let i=0; i<5; i++) {
