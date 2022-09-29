@@ -52,7 +52,7 @@ function checkWord() {
             results.innerHTML = 'Phew! Click here to replay.';
             modal.style.display = 'block';
         } else {
-            results.innerHTML = 'Phew! Click here to replay.';
+            results.innerHTML = 'Nice! Click here to replay.';
             modal.style.display = 'block';
             }
         //results screen is dependent on how many tries it took user to get right word.
