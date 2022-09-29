@@ -20,6 +20,7 @@ window.addEventListener('keyup', (event) => {
     } else if (event.key == 'Backspace') {
         arrWord.pop(); 
         row.children[arrWord.length].innerText = ''; 
+        alert.innerText = '';
         row.children[arrWord.length].classList.remove('box');
     } else if (event.key.match(/[a-z]/gi)
                 && event.key.length === 1 
@@ -56,6 +57,7 @@ function checkWord() {
             modal.style.display = 'block';
     } else {
         alert.innerText = '';
+
         var occSol = {};
         for (let i=0; i<5; i++) {
             var elementSol = arrSol[i];
@@ -65,13 +67,18 @@ function checkWord() {
                 occSol[elementSol] = 1; 
             }
         }
-        console.log(rounds);
+
         for (let i=0; i<5; i++) {
             if (arrWord[i] === arrSol[i]) {
                 row.children[i].classList.add('green');
                 arrGreen.push(arrWord[i]);
-                occSol[`${arrWord[i]}`] -= 1; 
-            } else if (arrSol.includes(arrWord[i])) {
+                occSol[`${arrWord[i]}`] -= 1;
+            }
+        }
+        
+
+        for (let i=0; i<5; i++) {
+            if (arrSol.includes(arrWord[i])) {
                 if (occSol[`${arrWord[i]}`] > 0) {
                     row.children[i].classList.add('yellow');
                     arrYellow.push(arrWord[i]);
@@ -86,7 +93,7 @@ function checkWord() {
                 arrGrey.push(arrWord[i]);
             }
         }
-        console.log(rounds);
+
         rounds = rounds-1;
         row = document.getElementById(`row-${7-rounds}`);
         arrWord = [];
@@ -132,6 +139,10 @@ const modal = document.getElementById('modal');
 
 const results = document.getElementById('results');
 
+const help = document.getElementById('help');
+
+const alert = document.getElementById('alert');
+
 window.addEventListener('click', (event) => {
     if (event.target == modal) {
         modal.style.display = "none";
@@ -141,7 +152,3 @@ window.addEventListener('click', (event) => {
 results.addEventListener('click', () => {
     location.reload(true);
 })
-
-const alert = document.getElementById('alert');
-
-//bump effect
