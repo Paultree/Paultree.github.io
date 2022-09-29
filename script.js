@@ -33,6 +33,7 @@ let arrGrey = [];
 
 
 function checkWord() {
+    console.log(rounds)
     if (!wordList.includes(arrWord.join(''))) {
         alert('This is not a valid word');
 
