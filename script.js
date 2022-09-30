@@ -57,7 +57,6 @@ function changeGridColor() {
             if (arrWord[i] === arrSol[i]) {
                 row.children[i].classList.add('green');
                 arrGreen.push(arrWord[i]);
-                occSol[`${arrWord[i]}`] -= 1;
             }
         }
         // checks for any correct position letters. removes one letter occurrence.
