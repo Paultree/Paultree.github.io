@@ -77,3 +77,8 @@ To be implemented:
 - Re-arranged checkWord() so that it evaluates green letters first then checks for yellows/greys. Fixes an issue with the game where if answer only has 1 occurrence of a specific letter but submitted word has more than 1 occurrence and their positions is in a correct and incorrect position. If incorrect position occurs first, it turns yellow but then the correct position turns green.
 - Added in code so that user is not able to submit same word more than once.
 - Added in audio for when user wins/loses
+
+1/10/2022
+- minor fixes to bugs found.
+    - addressed for scenario where answer has 1 letter occurrence less than user's word.
+        - if user's letter is at exact position and at a position before the green position, it will turn it grey instead of yellow.
