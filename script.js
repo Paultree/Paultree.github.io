@@ -16,6 +16,35 @@ let rounds = 6;
  
 let row = document.getElementById(`row-${7-rounds}`); //grabs row-1, then after checking guess will grab row-2, and so on..
 
+//results box//
+const modal = document.getElementById('modal');
+
+const results = document.getElementById('results');
+
+const help = document.getElementById('help');
+
+const alert = document.getElementById('alert');
+
+window.addEventListener('click', (event) => {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    })  
+//clicking outside the results box will close the results box
+
+results.addEventListener('click', () => {
+    location.reload(true);
+})
+//clicking the results box will reset the game
+
+const reset = document.getElementById('reset');
+
+reset.addEventListener('click', () => {
+    location.reload(true);
+})
+//reset button//
+
+
 window.addEventListener('keyup', (event) => {
     if (event.key == 'Enter') {
         checkWord();   
@@ -143,7 +172,6 @@ function checkWord() {
     }
 }
 
-
 //clickable keyboard
 const keys = document.getElementsByClassName('key');
 
@@ -165,30 +193,3 @@ for (let key of keys) {
     })
 }
 
-//results box//
-const modal = document.getElementById('modal');
-
-const results = document.getElementById('results');
-
-const help = document.getElementById('help');
-
-const alert = document.getElementById('alert');
-
-window.addEventListener('click', (event) => {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        }
-    })  
-//clicking outside the results box will close the results box
-
-results.addEventListener('click', () => {
-    location.reload(true);
-})
-//clicking the results box will reset the game
-
-const reset = document.getElementById('reset');
-
-reset.addEventListener('click', () => {
-    location.reload(true);
-})
-//reset button//
