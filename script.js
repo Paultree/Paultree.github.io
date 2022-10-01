@@ -187,12 +187,14 @@ for (let key of keys) {
             let letter = String.fromCharCode(`${event.target.dataset.key}`)
             arrWord.push(letter);
             row.children[arrWord.length-1].innerText = arrWord[arrWord.length-1];
+            row.children[arrWord.length-1].classList.add('box');
         } else if (event.target.dataset.key == 13) {
             checkWord();
         } else if (event.target.dataset.key == 8) {
             arrWord.pop();
             row.children[arrWord.length].innerText = '';
             alert.innerText = '';
+            row.children[arrWord.length].classList.remove('box');
         }
     })
 }
