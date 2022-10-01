@@ -39,7 +39,6 @@ window.addEventListener('keyup', (event) => {
 let arrGreen = [];
 let arrYellow = [];
 let arrGrey = [];
-let arrSubmitted = [];
 
 function changeGridColor() {
     var occSol = {};
