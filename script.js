@@ -165,7 +165,7 @@ function checkWord() {
             arrSubmitted.push(arrWord.join(''));
             changeGridColor();
             changeKeyColor();
-            rounds = rounds-1;
+            rounds -= 1;
             row = document.getElementById(`row-${7-rounds}`);
             //moves our inputs into the next row of the grid.
             arrWord = [];
