@@ -138,7 +138,6 @@ function winMessage() {
         }
 }
 
-
 function checkWord() {
     if (!wordList.includes(arrWord.join(''))) {
         alert.innerText = 'This is not a valid word!';
