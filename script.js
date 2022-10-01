@@ -149,6 +149,7 @@ function checkWord() {
         changeKeyColor();
         winSound.play();
         //checks if user submits the correct word
+        score += 1;
         winMessage();
         //results screen is dependent on how many tries it took user to get right word.
     } else if (rounds == 1) {
@@ -160,7 +161,7 @@ function checkWord() {
             //checks if user submits the correct word
         
         //what the result screen shows if user fails.
-    } else if (!arrSubmitted.includes(arrWord.join(''))) {
+    } else if (!arrSubmitted.includes(arrWord.join(''))) { //doesn't allow duplicate words to be submitted.
         arrSubmitted.push(arrWord.join(''));
         changeGridColor();
         changeKeyColor();
@@ -192,4 +193,5 @@ for (let key of keys) {
         }
     })
 }
+
 
