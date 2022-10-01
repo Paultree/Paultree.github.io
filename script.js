@@ -160,15 +160,19 @@ function checkWord() {
             //checks if user submits the correct word
         
         //what the result screen shows if user fails.
-    } else if (!arrSubmitted.includes(arrWord.join(''))) { //doesn't allow duplicate words to be submitted.
-        arrSubmitted.push(arrWord.join(''));
-        changeGridColor();
-        changeKeyColor();
-        rounds = rounds-1;
-        row = document.getElementById(`row-${7-rounds}`);
-        //moves our inputs into the next row of the grid.
-        arrWord = [];
-        //resets user input.
+    } else {
+        if (!arrSubmitted.includes(arrWord.join(''))) { //doesn't allow duplicate words to be submitted.
+            arrSubmitted.push(arrWord.join(''));
+            changeGridColor();
+            changeKeyColor();
+            rounds = rounds-1;
+            row = document.getElementById(`row-${7-rounds}`);
+            //moves our inputs into the next row of the grid.
+            arrWord = [];
+            //resets user input.
+        } else {
+            alert.innerText = 'You have already used this word...';
+        }
     }
 }
 
