@@ -151,7 +151,7 @@ function checkWord() {
         //checks if user submits the correct word
         winMessage();
         //results screen is dependent on how many tries it took user to get right word.
-    } else if (rounds == 1) {
+    } else if (rounds == 1 && !(arrWord.join(',') === arrSol.join(','))) {
         results.innerHTML = `Unlucky! The word was ${arrSol.join('')}! Click here to replay.`;
         modal.style.display = 'block';
         changeGridColor();
