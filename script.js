@@ -39,6 +39,7 @@ window.addEventListener('keyup', (event) => {
 let arrGreen = [];
 let arrYellow = [];
 let arrGrey = [];
+let arrSubmitted = []
 
 function changeGridColor() {
     var occSol = {};
@@ -98,6 +99,17 @@ function changeKeyColor() {
     //changes keys on keyboard from grey to yellow then green.
 }
 
+function winMessage() {
+    if (rounds == 1) {
+        results.innerHTML = 'Phew! Click here to replay.';
+        modal.style.display = 'block';
+    } else {
+        results.innerHTML = 'Nice! Click here to replay.';
+        modal.style.display = 'block';
+        }
+}
+
+
 function checkWord() {
     if (!wordList.includes(arrWord.join(''))) {
         alert.innerText = 'This is not a valid word!';
@@ -108,13 +120,7 @@ function checkWord() {
         changeKeyColor();
         winSound.play();
         //checks if user submits the correct word
-        if (rounds == 1) {
-            results.innerHTML = 'Phew! Click here to replay.';
-            modal.style.display = 'block';
-        } else {
-            results.innerHTML = 'Nice! Click here to replay.';
-            modal.style.display = 'block';
-            }
+        winMessage();
         //results screen is dependent on how many tries it took user to get right word.
     } else if (rounds == 1) {
         results.innerHTML = `Unlucky! The word was ${arrSol.join('')}! Click here to replay.`;
