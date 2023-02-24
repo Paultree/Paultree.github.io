@@ -8,6 +8,8 @@ Purpose of this project is to build a wordle clone using HTML, CSS and JS.
 
 # Link
 
+https://paultree.github.io/wordle-clone/
+
 # Setup
 
 # MVP
